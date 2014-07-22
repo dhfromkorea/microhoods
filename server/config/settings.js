@@ -3,7 +3,7 @@ var path = require('path');
 var rootPath = path.normalize(__dirname + '/../..'); 
 
 // a work around for allowing both a development and deployment environment
-if (process.env.PORT===undefined) {
+if (process.env.PORT === undefined) {
   var credentials = require('../../credentials.js');
 } else {
   var credentials = {
