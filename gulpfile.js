@@ -11,6 +11,7 @@ var minifyCss = require('gulp-minify-css');
 var concat = require('gulp-concat');
 var uglify = require('gulp-uglify');
 var jshint = require('gulp-jshint');
+var lab = require('gulp-lab');
 
 // The gulpfile has been set up to create a dist file for deployment. 
 // It has not been used in our workflow and it will be up to you to 
@@ -50,6 +51,16 @@ gulp.task('lint', function() {
     .pipe(jshint.reporter('default'))
 });
 
+//test server files
+gulp.task('test', function () {
+  return gulp.src(paths.specs)
+    .pipe(lab({
+      args: '-v',
+      opts: {
+        emitLabError: true
+      }
+    }));
+});
 // concat and uglify js files
 gulp.task('scripts', function() {
   return gulp.src(paths.scripts)
@@ -95,5 +106,5 @@ gulp.task('watch', function() {
   gulp.watch(paths.html, ['html']);
 });
 
-gulp.task('default', ['reload', 'serve', 'clean', 'lint', 'scripts', 'styles', 'html', 'watch']);
+gulp.task('default', ['reload', 'serve', 'clean', 'lint', 'test', 'scripts', 'styles', 'html', 'watch']);
 
