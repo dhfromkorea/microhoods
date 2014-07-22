@@ -69,21 +69,24 @@ suite('routes', function(done) {
 
     test('should have wildcard set to access-control-allow-origin', function(done) {
       server.inject(route, function(response) {
-        expect(server.settings.cors['origin']).to.equal('*');
+        expect(server.settings.cors['origin'][0]).to.equal('*');
         done();
       });
     });
 
     test('should have access-control-allow-methods set to GET, POST, PUT, DELETE, OPTIONS', function(done) {
       server.inject(route, function(resposne) {
-        expect(server.settings.cors['methods']).to.equal(['GET, POST, PUT, DELETE, OPTIONS']);
+        var methods = ['GET, POST, PUT, DELETE, OPTIONS'];
+        for(var i = 0; i < methods.length; i++){
+          expect(server.settings.cors['methods'][i]).to.equal(methods[i]);
+        }
         done();
       });
     });
 
     test('should have access-control-allow-headers set to Origin, Content-Type, Accept', function(done) {
       server.inject(route, function(response) { 
-        expect(server.settings.cors['headers']).to.equal('Origin, Content-Type, Accept');
+        expect(server.settings.cors['headers'][0]).to.equal(['Origin, Content-Type, Accept'][0]);
         done();
       });
     });
