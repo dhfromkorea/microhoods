@@ -18,7 +18,7 @@ angular.module('app.services', [])
         var request = new XMLHttpRequest();
         request.open('POST', '/', true);
         request.send(payload);
-        $state.transitionTo('home');
+        $state.go('home');
       } else {
         // user is logged out
       }

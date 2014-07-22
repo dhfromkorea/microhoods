@@ -231,11 +231,11 @@ var app = angular.module('app.home', [])
           mapLayer = true;
         }
       }
-    }
+    };
 
     $scope.about = function() {
-      $state.transitionTo('about');
-    }
+      $state.go('about');
+    };
 
     //add tag to current location
     $scope.addHere = function(distance) {

@@ -9,7 +9,7 @@ angular.module('app.login', [])
   .controller('login-controller', function($scope, $state, authFactory) {
     $scope.authenticate = function() {
       if (authFactory.user) {
-        $state.transitionTo('home');
+        $state.go('home');
       } else {
         authFactory.auth.login('google');
       }
