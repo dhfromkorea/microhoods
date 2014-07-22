@@ -5,7 +5,7 @@ angular.module('app', ['app.home', 'app.login', 'app.services', 'ui.router'])
       e && e.preventDefault();
       if (toState.authenticate && !authFactory.user) {
         // User isn’t authenticated, redirect away from restricted content
-        $state.transitionTo('login');
+        $state.go('login');
       }
     });
   })
