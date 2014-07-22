@@ -1,17 +1,23 @@
-angular.module('microhoods.login', [])
-.controller('login-controller', function($scope, $state, fbAuth){
-  $scope.authenticate = function(){
-    if(fbAuth.user){
-      $state.transitionTo('home');
-    }else{
-      fbAuth.auth.login('google');
-    }
-  }
-
-  $scope.logout = function(){
-    if(fbAuth.user){
-      fbAuth.auth.logout();
-      window.location.reload();
-    }
-  }
-});
+angular.module('app.login', [])
+  .config(function($stateProvider) {
+    $stateProvider
+      .state('login', {
+        url: '/login',
+        templateUrl: 'login.html'
+      });
+  })
+  .controller('login-controller', function($scope, $state, authFactory) {
+    $scope.authenticate = function() {
+      if (authFactory.user) {
+        $state.transitionTo('home');
+      } else {
+        authFactory.auth.login('google');
+      }
+    };
+    $scope.logout = function() {
+      if (authFactory.user) {
+        authFactory.auth.logout();
+        window.location.reload();
+      }
+    };
+  });
